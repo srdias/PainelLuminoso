@@ -87,17 +87,8 @@ public class Pixel {
     void draw(Graphics g) {
 
         if (this.isLimpo()) {
-            int corGrade = 210;
-
             g.setColor(Color.WHITE);
             g.fillRect(this.getX(),
-                    this.getY(),
-                    this.getW(),
-                    this.getH());
-            
-            g.setColor(new Color(corGrade, corGrade, corGrade));
-
-            g.drawRect(this.getX(),
                     this.getY(),
                     this.getW(),
                     this.getH());
@@ -109,6 +100,14 @@ public class Pixel {
                     this.getW(),
                     this.getH());
         }
+        int corGrade = 210;
+        g.setColor(new Color(corGrade, corGrade, corGrade));
+
+        g.drawRect(this.getX(),
+                this.getY(),
+                this.getW(),
+                this.getH());
+
     }
 
     public Color getCorFundo() {

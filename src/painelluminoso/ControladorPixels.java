@@ -38,7 +38,7 @@ public abstract class ControladorPixels {
     }
 
     public final void gerarPixels(Container contentPane) {
-        int tamQuadros = 15;
+        int tamQuadros = 10;
         int startX = 15;
         int startY = 40;
         int x;
