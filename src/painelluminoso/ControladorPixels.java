@@ -38,7 +38,7 @@ public abstract class ControladorPixels {
     }
 
     public final void gerarPixels(Container contentPane) {
-        int tamQuadros = 10;
+        int tamQuadros = 15;
         int startX = 15;
         int startY = 40;
         int x;
@@ -55,10 +55,10 @@ public abstract class ControladorPixels {
                 indiceX = 0;
                 while (x + tamQuadros < width) {
                     this.addPixel(new Pixel(indiceX, indiceY, x, y, tamQuadros, tamQuadros));
-                    x += tamQuadros + 2;
+                    x += tamQuadros + 0;
                     indiceX++;
                 }
-                y += tamQuadros + 2;
+                y += tamQuadros + 0;
                 indiceY++;
             }
             this.setQtdeQuadroColunas(indiceX);
