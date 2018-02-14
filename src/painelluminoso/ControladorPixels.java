@@ -9,14 +9,20 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public abstract class ControladorPixels {
+public abstract class ControladorPixels implements Runnable {
 
     private ArrayList<Pixel> listaPixel;
     private Graphics graphics;
-    
+
     private int qtdeQuadroLinhas;
     private int qtdeQuadroColunas;
+
+    private boolean executar = false;
+    private int tempoSeep;
+    boolean lento = false;
 
     public void iniciarControle(JanelaPainel janela) {
         listaPixel = new ArrayList<>();
@@ -76,6 +82,17 @@ public abstract class ControladorPixels {
         for (Pixel pixel : listaPixel) {
             if (pixel.getIndiceX() == x && pixel.getIndiceY() == y) {
                 pixel.setCorFundo(cor);
+                if (isExecutar()) {
+                    pixel.draw(graphics);
+                } else {
+                    if (lento) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ControladorPixels.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
                 break;
             }
         }
@@ -105,6 +122,46 @@ public abstract class ControladorPixels {
 
     public void setQtdeQuadroColunas(int qtdeQuadroColunas) {
         this.qtdeQuadroColunas = qtdeQuadroColunas;
+    }
+
+    public abstract void threadInicio();
+
+    public abstract void threadDesenhar();
+
+    @Override
+    public void run() {
+
+        this.setExecutar(true);
+
+        this.desenhar();
+
+        this.threadInicio();
+
+        while (isExecutar()) {
+
+            this.threadDesenhar();
+
+            try {
+                Thread.sleep(this.tempoSeep);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ControladorPixels.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    public void startThread(int tempoSeep) {
+        this.tempoSeep = tempoSeep;
+        Thread thread = new Thread(this);
+        thread.start();
+    }
+
+    public boolean isExecutar() {
+        return executar;
+    }
+
+    public void setExecutar(boolean executar) {
+        this.executar = executar;
     }
 
 }

@@ -14,6 +14,11 @@ import painelluminoso.ControladorPixels;
  */
 public class TesteAdriano extends ControladorPixels {
 
+    int coluna;
+    int linha;
+
+    int direcao;
+
     @Override
     public void desenhar() {
         setColor(10, 10, Color.RED);
@@ -22,7 +27,7 @@ public class TesteAdriano extends ControladorPixels {
         setColor(10, 11, Color.BLUE);
         setColor(11, 11, Color.BLUE);
         setColor(12, 11, Color.BLUE);
-        
+
         setColor(0, 30, Color.ORANGE);
         setColor(1, 30, Color.ORANGE);
         setColor(2, 30, Color.ORANGE);
@@ -30,16 +35,51 @@ public class TesteAdriano extends ControladorPixels {
         setColor(4, 30, Color.ORANGE);
 
         //-- Diagonal
-        for(int i=20;i<50;i++){
+        for (int i = 20; i < 50; i++) {
             setColor(i, i, Color.YELLOW);
         }
 
         //-- Linha
-        for(int i=1;i<this.getQtdeQuadroColunas() -1;i++){
-            setColor(i,1, Color.DARK_GRAY);
+        for (int i = 1; i < this.getQtdeQuadroColunas() - 1; i++) {
+            setColor(i, 1, Color.DARK_GRAY);
         }
 
         drawPixels();
+    }
+
+    @Override
+    public void threadInicio() {
+        coluna = 0;
+        linha = 0;
+        direcao = 1;
+    }
+
+    @Override
+    public void threadDesenhar() {
+
+        setColor(coluna, linha, Color.red);
+        
+        if (direcao == 1) {
+            
+            coluna++;
+            if (coluna == this.getQtdeQuadroColunas()) {
+                direcao=2;
+                linha+=2;
+                coluna--;
+            }
+            
+        }else{
+            
+            coluna--;
+            if (coluna == -1) {
+                direcao=1;
+                linha+=2;
+                coluna++;
+            }
+            
+        }
+
+        
     }
 
 }
