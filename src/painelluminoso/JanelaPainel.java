@@ -5,8 +5,13 @@
  */
 package painelluminoso;
 
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyEvent;
 import testes.TesteAdriano;
 import testes.TesteDiana;
 import testes.TesteLinhas;
@@ -46,11 +51,24 @@ public class JanelaPainel extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
 
@@ -62,7 +80,6 @@ public class JanelaPainel extends javax.swing.JFrame {
         });
 
         jButton3.setText("Linhas");
-        jButton3.setActionCommand("Linhas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -99,13 +116,24 @@ public class JanelaPainel extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         controladorPixels = new TesteAdriano();
         controladorPixels.iniciarControle(this);
-        controladorPixels.desenhar();
+        //controladorPixels.desenhar();
+        controladorPixels.startThread(20);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         controladorPixels = new ControladorPixelsPadrao();
         controladorPixels.iniciarControle(this);
         controladorPixels.desenhar();
+        
+        
+        
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -119,6 +147,18 @@ public class JanelaPainel extends javax.swing.JFrame {
         controladorPixels.iniciarControle(this);
         controladorPixels.desenhar();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+
+    }//GEN-LAST:event_formKeyTyped
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        this.setTitle(this.getTitle() + "x");
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments
