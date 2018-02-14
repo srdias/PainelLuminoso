@@ -86,6 +86,16 @@ public class TesteDesenho extends ControladorPixels {
             setColor(i, y, cor);
         }  
     }
+
+    @Override
+    public void threadInicio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void threadDesenhar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
     
     
