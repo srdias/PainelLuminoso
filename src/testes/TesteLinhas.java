@@ -8,11 +8,12 @@ public class TesteLinhas extends ControladorPixels {
     @Override
     public void desenhar() {
         int controle = 1;
+        Color minhaCor = new Color(0, 0, 0);
 
         for (int linha = 0; linha < this.getQtdeQuadroLinhas(); linha = linha + 2) {
 
             for (int coluna = 0; coluna < this.getQtdeQuadroColunas(); coluna++) {
-                setColor(coluna, linha, Color.BLACK);
+                setColor(coluna, linha, minhaCor);
             }
             if (controle == 1) {
                 setColor(this.getQtdeQuadroColunas() - 1, linha + 1, Color.BLACK);
